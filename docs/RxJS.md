@@ -6,8 +6,6 @@ RxJSは４系と５系の２種類ある本ソースでは5系を使用してい
  + [４系](https://github.com/Reactive-Extensions/RxJS)
  + [５系](https://github.com/ReactiveX/rxjs)
  + [4->5移行ガイド](https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md)
- + [IxJS(類似品)](https://github.com/ReactiveX/IxJS)
-   + Interactive Extensions 
 
 ### RxJSとは
 
@@ -18,7 +16,7 @@ RxJSは４系と５系の２種類ある本ソースでは5系を使用してい
  + javascriptエンジニア向けの説明
    + lodash to event
  + それ以外の説明
-   + トリガー + バッチ + SQL
+   + トリガー + バッチ + SQL っぽい
 
 
 一連のイベントを管理する為に色々もりだくさんなライブラリ
@@ -89,8 +87,8 @@ Dispatcher
 │   │   │   ├── sample.spec.ts
 │   │   │   └── sample.ts
 │   │   ├── example
-│   │   │   └── sample.ts        #  今回主に触るファイル
-│   │   ├── rx                   # rxjs回りの処理を固める
+│   │   │   └── sample.ts        # 今回主に触るメインプログラム
+│   │   ├── rx                   # rxjs回りの処理
 │   │   │   ├── sample.spec.ts
 │   │   │   └── sample.ts
 │   │   ├── main.pcss
@@ -238,7 +236,7 @@ export function dragAndDropObserve(
   });
 ```
 
-### テストコードの実装(ダブルクリック)
+### テストコードの実装(ドラッグ＆ドロップ)
 
 `src/app/rx/sample.spec.ts`
 
