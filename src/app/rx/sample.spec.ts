@@ -52,8 +52,8 @@ describe("rx test", function() {
     });
   });
 
-  describe('checkDoubleClick', () => {
-    it("double click action", () => {
+  describe('drag and drop', () => {
+    it("action case", () => {
       let ts = new TestScheduler(rxHelper.toDeepEqual);
 
       const value = {
