@@ -318,9 +318,9 @@ export function dragAndDropObserve(
  */
 export class SampleObservable {
 
-  public fetchObserve: Observable<Promise<any>>;
+  public fetchObserve: Observable<ISamples[]>;
 
-  constructor(obs: Observable<Promise<any>>) {
+  constructor(obs: Observable<ISamples[]>) {
     this.fetchObserve = obs;
   }
 }
@@ -331,18 +331,19 @@ export class SampleObservable {
 
 
 ```typescript
-  /** ちょっと実践的な使い方 (Observable) */
+  /** より実践的な使い方 (Observable) */
   (() => {
     /** 定義 */
-    var observe = new rxSample.SampleObservable(Rx.Observable.fromPromise(fetch('/api/sample').then(toJson)));
+    var observe = new rxSample.SampleObservable(Rx.Observable.fromPromise(fetch('/api/sample').then(toSampleJson)));
     var source = observe.fetchObserve
-      .flatMap((data: any): any => data)
-      .mergeMap((data: any) => Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toJson)));
+      .flatMap((data: rxSample.ISamples[]): rxSample.ISamples[] => data)
+      .mergeMap((data: rxSample.ISamples): Rx.Observable<rxSample.ISamples> =>
+        Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toSamplesJson)));
 
     /** View Component A */
     (() => {
       let requestSubscribeA = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'pink'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'pink'),
         (e: Error) => console.log(e),
         () => console.log('A OBSERVABLE COMPLITE')
       )
@@ -354,7 +355,7 @@ export class SampleObservable {
     /** View Component B */
     (() => {
       let requestSubscribeB = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'gray'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'gray'),
         (e: Error) => console.log(e),
         () => console.log('B OBSERVABLE COMPLITE')
       );
@@ -377,10 +378,10 @@ export class SampleObservable {
  */
 export class SampleSubject {
 
-  public fetchSubject: Subject<Promise<any>>;
+  public fetchSubject: Subject<ISamples[]>;
 
   constructor() {
-    this.fetchSubject = new Subject<Promise<any>>();
+    this.fetchSubject = new Subject<ISamples[]>();
   }
 }
 ```
@@ -392,13 +393,14 @@ export class SampleSubject {
   (() => {
     var subject = new rxSample.SampleSubject();
     var source = subject.fetchSubject
-      .flatMap((data: any): any => data)
-      .mergeMap((data: any) => Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toJson)));
+      .flatMap((data: rxSample.ISamples[]): rxSample.ISamples[] => data)
+      .mergeMap((data: rxSample.ISamples): Rx.Observable<rxSample.ISamples> =>
+        Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toSamplesJson)));
 
     /** View Component A */
     (() => {
       let requestSubscribeA = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'green'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'green'),
         (e: Error) => console.log(e),
         () => console.log('A SUBJECT COMPLITE')
       )
@@ -410,7 +412,7 @@ export class SampleSubject {
     /** View Component B */
     (() => {
       let requestSubscribeB = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'yellow'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'yellow'),
         (e: Error) => console.log(e),
         () => console.log('B SUBJECT COMPLITE')
       );
@@ -421,7 +423,7 @@ export class SampleSubject {
 
     /** Action Component */
     (() => {
-      fetch('/api/sample').then(toJson).then((data: any) => {
+      fetch('/api/sample').then(toSampleJson).then((data: rxSample.ISamples[]) => {
         subject.fetchSubject.next(data);
       })
     })();

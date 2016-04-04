@@ -5,10 +5,10 @@ import * as d3 from 'd3';
 import * as rxSample from '../rx/sample';
 import * as d3Sample from '../d3/sample';
 
-declare function fetch(url: string): Promise<any>;
-
 var sample2: HTMLDivElement = <HTMLDivElement>document.querySelector('.sample2');
-const toJson = (res: any): any => res.json();
+
+const toSampleJson = (res: Body): Promise<rxSample.ISample[]> => res.json();
+const toSamplesJson = (res: Body): Promise<rxSample.ISamples> => res.json();
 
 export function exec() {
 
@@ -43,15 +43,16 @@ export function exec() {
   /** より実践的な使い方 (Observable) */
   (() => {
     /** 定義 */
-    var observe = new rxSample.SampleObservable(Rx.Observable.fromPromise(fetch('/api/sample').then(toJson)));
+    var observe = new rxSample.SampleObservable(Rx.Observable.fromPromise(fetch('/api/sample').then(toSampleJson)));
     var source = observe.fetchObserve
-      .flatMap((data: any): any => data)
-      .mergeMap((data: any) => Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toJson)));
+      .flatMap((data: rxSample.ISamples[]): rxSample.ISamples[] => data)
+      .mergeMap((data: rxSample.ISamples): Rx.Observable<rxSample.ISamples> =>
+        Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toSamplesJson)));
 
     /** View Component A */
     (() => {
       let requestSubscribeA = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'pink'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'pink'),
         (e: Error) => console.log(e),
         () => console.log('A OBSERVABLE COMPLITE')
       )
@@ -63,7 +64,7 @@ export function exec() {
     /** View Component B */
     (() => {
       let requestSubscribeB = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'gray'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'gray'),
         (e: Error) => console.log(e),
         () => console.log('B OBSERVABLE COMPLITE')
       );
@@ -77,13 +78,14 @@ export function exec() {
   (() => {
     var subject = new rxSample.SampleSubject();
     var source = subject.fetchSubject
-      .flatMap((data: any): any => data)
-      .mergeMap((data: any) => Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toJson)));
+      .flatMap((data: rxSample.ISamples[]): rxSample.ISamples[] => data)
+      .mergeMap((data: rxSample.ISamples): Rx.Observable<rxSample.ISamples> =>
+        Rx.Observable.fromPromise(fetch(`/api/sample/${data.id}`).then(toSamplesJson)));
 
     /** View Component A */
     (() => {
       let requestSubscribeA = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'green'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'green'),
         (e: Error) => console.log(e),
         () => console.log('A SUBJECT COMPLITE')
       )
@@ -95,7 +97,7 @@ export function exec() {
     /** View Component B */
     (() => {
       let requestSubscribeB = Rx.Subscriber.create(
-        (data: rxSample.IData) => d3Sample.createRundomText(data.id, data.name, 'yellow'),
+        (data: rxSample.ISample) => d3Sample.createRundomText(data.id, data.name, 'yellow'),
         (e: Error) => console.log(e),
         () => console.log('B SUBJECT COMPLITE')
       );
@@ -106,7 +108,7 @@ export function exec() {
 
     /** Action Component */
     (() => {
-      fetch('/api/sample').then(toJson).then((data: any) => {
+      fetch('/api/sample').then(toSampleJson).then((data: rxSample.ISamples[]) => {
         subject.fetchSubject.next(data);
       })
     })();

@@ -8,7 +8,11 @@ import {
 
 //import * as rxdom from 'rxjs/Rx.DOM'
 
-export interface IData {
+export interface ISamples {
+  id: number,
+}
+
+export interface ISample {
   id: number,
   name: string,
 }
@@ -51,9 +55,9 @@ export function dragAndDropObserve(
  */
 export class SampleObservable {
 
-  public fetchObserve: Observable<Promise<any>>;
+  public fetchObserve: Observable<ISamples[]>;
 
-  constructor(obs: Observable<Promise<any>>) {
+  constructor(obs: Observable<ISamples[]>) {
     this.fetchObserve = obs;
   }
 }
@@ -63,10 +67,10 @@ export class SampleObservable {
  */
 export class SampleSubject {
 
-  public fetchSubject: Subject<Promise<any>>;
+  public fetchSubject: Subject<ISamples[]>;
 
   constructor() {
-    this.fetchSubject = new Subject<Promise<any>>();
+    this.fetchSubject = new Subject<ISamples[]>();
   }
 }
 
