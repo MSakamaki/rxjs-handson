@@ -68,6 +68,3 @@ remap-istanbul -i coverage/coverage.json -o coverage/coverage-remapped.json
  + [Drag and Drop](https://github.com/Reactive-Extensions/RxJS/blob/master/examples/dragndrop/dragndrop.js) 
  + [さねゆき師匠のgist](https://gist.github.com/saneyuki/be133d505b1eb91b4c72)
  + [Rx学習ノート](http://wilfrem.github.io/learn_rx/index.html)
- 
- 
- +  [spectacle-code-slide](https://github.com/thejameskyle/spectacle-code-slide)
