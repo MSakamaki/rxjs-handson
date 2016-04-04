@@ -8,7 +8,9 @@ import * as d3Sample from '../d3/sample';
 declare function fetch(url: string): Promise<any>;
 
 var sample2: HTMLDivElement = <HTMLDivElement>document.querySelector('.sample2');
-const toJson = (res: any): any => res.json();
+
+const toSampleJson = (res: Body): Promise<rxSample.ISample[]> => res.json();
+const toSamplesJson = (res: Body): Promise<rxSample.ISamples> => res.json();
 
 export function exec() {
 

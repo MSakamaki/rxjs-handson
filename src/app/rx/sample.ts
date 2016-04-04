@@ -7,7 +7,11 @@ import {
 } from 'rxjs';
 
 // 後で使うインタフェース
-export interface IData {
+export interface ISamples {
+  id: number,
+}
+
+export interface ISample {
   id: number,
   name: string,
 }
