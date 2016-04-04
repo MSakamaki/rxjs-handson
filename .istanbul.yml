@@ -1,0 +1,7 @@
+instrumentation:
+  root: .tmp/spec
+  extensions:
+    - .js
+  excludes: ['**/*.spec.js']
+reporting:
+    dir: ./report/coverage
