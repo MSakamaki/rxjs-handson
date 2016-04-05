@@ -55,7 +55,7 @@
     "typings": "^0.7.9"
   },
   "dependencies": {
-    "rxjs": "^5.0.0-beta.4",
+    "rxjs": "^5.0.0-beta.5",
     "d3": "^3.5.16"
   },
   "contributes": {
@@ -83,13 +83,11 @@
       "jspm": "src/jspm.config.js"
     },
     "dependencies": {
-      "": "npm:@reactivex/rxjs@^5.0.0-beta.3",
+      "rxjs": "npm:@reactivex/rxjs@^5.0.0-beta.5",
       "css": "github:systemjs/plugin-css@^0.1.20",
-      "d3": "npm:d3@^3.5.16",
-      "rxjs": "npm:rxjs@^5.0.0-beta.3"
+      "d3": "npm:d3@^3.5.16"
     },
     "devDependencies": {
-      "clean-css": "npm:clean-css@^3.4.11",
       "plugin-typescript": "github:frankwallis/plugin-typescript@^4.0.2"
     },
     "peerDependencies": {
@@ -109,9 +107,6 @@
       "util": "github:jspm/nodelibs-util@^0.2.0-alpha"
     },
     "overrides": {
-      "npm:@reactivex/rxjs@5.0.0-beta.4": {
-        "format": "cjs"
-      },
       "npm:d3@3.5.16": {
         "meta": {
           "d3.js": {

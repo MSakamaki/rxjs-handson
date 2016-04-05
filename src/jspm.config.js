@@ -26,7 +26,7 @@ SystemJS.config({
     "target": "es5",
     "module": "system",
     "noImplicitAny": true
-  }
+  },
 });
 
 SystemJS.config({
@@ -36,11 +36,9 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
-    "": "npm:@reactivex/rxjs@5.0.0-beta.4",
     "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
     "buffer": "github:jspm/nodelibs-buffer@0.2.0-alpha",
     "child_process": "github:jspm/nodelibs-child_process@0.2.0-alpha",
-    "clean-css": "npm:clean-css@3.4.11",
     "css": "github:systemjs/plugin-css@0.1.20",
     "d3": "npm:d3@3.5.16",
     "events": "github:jspm/nodelibs-events@0.2.0-alpha",
@@ -95,17 +93,6 @@ SystemJS.config({
         "isarray": "npm:isarray@1.0.0"
       }
     },
-    "npm:clean-css@3.4.11": {
-      "map": {
-        "commander": "npm:commander@2.8.1",
-        "source-map": "npm:source-map@0.4.4"
-      }
-    },
-    "npm:commander@2.8.1": {
-      "map": {
-        "graceful-readlink": "npm:graceful-readlink@1.0.1"
-      }
-    },
     "npm:readable-stream@2.0.6": {
       "map": {
         "core-util-is": "npm:core-util-is@1.0.2",
@@ -114,11 +101,6 @@ SystemJS.config({
         "process-nextick-args": "npm:process-nextick-args@1.0.6",
         "string_decoder": "npm:string_decoder@0.10.31",
         "util-deprecate": "npm:util-deprecate@1.0.2"
-      }
-    },
-    "npm:source-map@0.4.4": {
-      "map": {
-        "amdefine": "npm:amdefine@1.0.0"
       }
     },
     "npm:stream-browserify@2.0.1": {
