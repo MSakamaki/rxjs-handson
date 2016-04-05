@@ -7,7 +7,7 @@
 
 ```sh
 # グローバルモジュールインストール
-npm -g install gulp
+npm -g install gulp typescript-node typescript-register ts-node
 
 # npmのインストール
 npm install
