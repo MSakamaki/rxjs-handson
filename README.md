@@ -48,6 +48,7 @@ remap-istanbul -i coverage/coverage.json -o coverage/coverage-remapped.json
  + [typescript型定義管理(typings)](https://github.com/typings/typings)
  + [Rx Js API](http://rxmarbles.com/)
  + [d3.js](https://d3js.org/) 
+ + [systemjsのCDN](https://cdnjs.com/libraries/systemjs)
 
 #### Typescript
 
