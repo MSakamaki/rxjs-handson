@@ -52,7 +52,8 @@
   <script>
     System.import('main').then((mainApp)=>{
       document.querySelector('.spinner').className = '';
-      mainApp.exec();
+      //mainApp.exec();
+      mainApp.todo();
     }).catch(e=>{
       throw e;
     });
