@@ -13,7 +13,7 @@ npm -g install gulp typescript-node typescript-register ts-node
 npm install
 
 # アプリ用ライブラリのインストール
-jspm install
+node_modules/.bin/jspm install
 
 ```
 
